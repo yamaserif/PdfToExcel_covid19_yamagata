@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "PdfToExcel_covid19_yamagata": {
+      "commandName": "Project",
+      "commandLineArgs": "./デバッグ用PDFファイル/corona-press3482_34992.pdf ./デバッグ用PDFファイル/xy15mg.pdf"
+    }
+  }
+}
