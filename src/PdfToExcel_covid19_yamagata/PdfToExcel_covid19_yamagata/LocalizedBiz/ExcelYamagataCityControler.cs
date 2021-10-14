@@ -50,13 +50,22 @@ namespace PdfToExcel_covid19_yamagata.LocalizedBiz
 
                     foreach (var writeItem in this.writeData.Covid19Data)
                     {
+                        var setDateString = this.writeData.Date?.ToString("yyyy/MM/dd") ?? string.Empty;
                         var cellQ = ExcelControler.InsertCellInWorksheet("Q", writeIndex, wsPart);
-                        cellQ.CellValue = new CellValue(this.writeData.Date?.ToString("yyyy/MM/dd") ?? string.Empty);
+                        cellQ.CellValue = new CellValue(setDateString);
                         cellQ.DataType = CellValues.String;
+
+                        var cellQ2 = ExcelControler.InsertCellInWorksheet("Q", writeIndex + 1, wsPart);
+                        cellQ2.CellValue = new CellValue(setDateString);
+                        cellQ2.DataType = CellValues.String;
 
                         var cellR = ExcelControler.InsertCellInWorksheet("R", writeIndex, wsPart);
                         cellR.CellValue = new CellValue("○");
                         cellR.DataType = CellValues.String;
+
+                        var cellR2 = ExcelControler.InsertCellInWorksheet("R", writeIndex, wsPart);
+                        cellR2.CellValue = new CellValue("○");
+                        cellR2.DataType = CellValues.String;
 
                         var cellS = ExcelControler.InsertCellInWorksheet("S", writeIndex, wsPart);
                         cellS.CellValue = new CellValue(writeItem.SubNumber ?? 0);

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using PdfToExcel_covid19_yamagata.IBiz;
 using PdfToExcel_covid19_yamagata.Biz;
@@ -18,10 +19,24 @@ namespace PdfToExcel_covid19_yamagata
             var pdfTexts = new List<PdfTextDataDto>();
             using (IPdfControler pdfControler = new PdfControler())
             {
-                foreach (var item in args)
+                if(args.Length > 0)
                 {
-                    pdfControler.Load(item);
-                    pdfTexts.Add(pdfControler.GetPdfTextData());
+                    foreach (var item in args)
+                    {
+                        pdfControler.Load(item);
+                        pdfTexts.Add(pdfControler.GetPdfTextData());
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("PDFのパスを入力してください\n（space\" \"かcomma\",\"で複数入力）");
+                    var pdfPaths = Console.ReadLine().Split(' ', ',');
+
+                    foreach (var item in pdfPaths)
+                    {
+                        pdfControler.Load(item);
+                        pdfTexts.Add(pdfControler.GetPdfTextData());
+                    }
                 }
             }
 
