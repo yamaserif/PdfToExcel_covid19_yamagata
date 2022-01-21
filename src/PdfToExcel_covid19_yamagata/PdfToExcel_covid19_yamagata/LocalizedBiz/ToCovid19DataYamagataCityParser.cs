@@ -55,6 +55,15 @@ namespace PdfToExcel_covid19_yamagata.LocalizedBiz
                     }
                     break;
                 }
+                else if(index == this.words.Length - 1)
+                {
+                    if (row != null)
+                    {
+                        row.Relation = this.words[index];
+                        baseData.Covid19Data.Add(row);
+                    }
+                    break;
+                }
             }
         }
     }

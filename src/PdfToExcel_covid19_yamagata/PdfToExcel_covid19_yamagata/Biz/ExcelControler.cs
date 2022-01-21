@@ -35,8 +35,8 @@ namespace PdfToExcel_covid19_yamagata.Biz
 
         public void WriteCovid19Data(IEnumerable<Covid19DataDto> writeData)
         {
-            writeData.OrderBy(wd => wd.Date);
-            foreach (var item in writeData)
+            var ascWriteData = writeData.OrderBy(wd => wd.Date);
+            foreach (var item in ascWriteData)
             {
                 Console.WriteLine(item.Path + " のデータをExcelの書き込んでいます。");
                 IExcelLocalizedControler excelLocalizedControler = null;

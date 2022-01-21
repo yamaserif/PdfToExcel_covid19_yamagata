@@ -47,7 +47,7 @@ namespace PdfToExcel_covid19_yamagata.LocalizedBiz
 
                     var sheetData = wsPart.Worksheet.GetFirstChild<SheetData>();
                     var lastIndex = uint.Parse(checkCell.CellReference?.Value?.TrimStart('Q'));
-                    var writeIndex = lastIndex + 1;
+                    var writeIndex = lastIndex + 2;
 
                     foreach (var writeItem in this.writeData.Covid19Data)
                     {

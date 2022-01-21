@@ -2,7 +2,7 @@
   "profiles": {
     "PdfToExcel_covid19_yamagata": {
       "commandName": "Project",
-      "commandLineArgs": "./デバッグ用PDFファイル/corona-press3482_34992.pdf ./デバッグ用PDFファイル/xy15mg.pdf"
+      "commandLineArgs": "./デバッグ用PDFファイル/20220121.pdf ./デバッグ用PDFファイル/corona-press3989_40302.pdf ./デバッグ用PDFファイル/corona-press4045_40962.pdf"
     }
   }
 }

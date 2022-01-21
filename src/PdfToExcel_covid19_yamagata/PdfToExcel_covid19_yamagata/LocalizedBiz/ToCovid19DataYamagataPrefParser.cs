@@ -1,10 +1,14 @@
 ﻿using PdfToExcel_covid19_yamagata.IBiz;
 using PdfToExcel_covid19_yamagata.Dto;
+using System.Configuration;
+using System.Linq;
 
 namespace PdfToExcel_covid19_yamagata.LocalizedBiz
 {
     public class ToCovid19DataYamagataPrefParser : IToCovid19DataLocalizedParser
     {
+        private string[] relationLinefeedWords = ConfigurationManager.AppSettings["YamagataPref_RelationLinefeedWords"].Split(",");
+
         private string[] words = null;
         string[] IToCovid19DataLocalizedParser.Words
         {
@@ -33,7 +37,7 @@ namespace PdfToExcel_covid19_yamagata.LocalizedBiz
 
                     if (row != null)
                     {
-                        row.Relation = this.words[index - 1];
+                        row.Relation = RelationWord(this.words[index - 1], this.words[index - 2]);
                         baseData.Covid19Data.Add(row);
                     }
                     row = new Covid19RowDataDto();
@@ -46,12 +50,31 @@ namespace PdfToExcel_covid19_yamagata.LocalizedBiz
                 {
                     if (row != null)
                     {
-                        row.Relation = this.words[index - 1];
+                        row.Relation = RelationWord(this.words[index - 1], this.words[index - 2]);
+                        baseData.Covid19Data.Add(row);
+                    }
+                    break;
+                }
+                else if (index == this.words.Length - 1)
+                {
+                    if (row != null)
+                    {
+                        row.Relation = RelationWord(this.words[index], this.words[index - 1]);
                         baseData.Covid19Data.Add(row);
                     }
                     break;
                 }
             }
+        }
+
+        private string RelationWord(string word, string beforeWord)
+        {
+            var returnWord = word;
+            if (relationLinefeedWords.Contains(word))
+            {
+                returnWord = beforeWord + word;
+            }
+            return returnWord;
         }
     }
 }
